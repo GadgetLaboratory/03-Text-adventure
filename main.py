@@ -1,3 +1,5 @@
+### plz hav mercy no done
+
 class Character: #define stats here: name, about, health, energy, strength, defense, agility
     def __init__(self, name, about, hp, mp, str, vit, agi):
 
@@ -11,15 +13,36 @@ class Equipment: #define flavor, effects, stats changes
     def __init__(self, flavor, effect, stat):
 
 #edit the below please and make the places ferial places
-rooms = {'empty': {'name': 'an empty room', 'east': 'bedroom', 'north': 'temple', 'contents': [],
-        'text': 'The stone floors and walls are cold and damp.'},
-    'temple': {'name': 'a small temple', 'east': 'torture', 'south': 'empty', 
-        'text': 'This seems to be a place of worship and deep contemplation.', 
-        'contents': ['bench', 'bench', 'bench', 'statue']},
-    'torture': {'name': 'a torture chamber', 'west': 'temple', 'south': 'bedroom', 'contents': ['chains', 'thumbscrews'],
-        'text': 'There is a rack and an iron maiden against the wall\naand some dark stains on the floor.'},
-    'bedroom': {'name': 'a bedroom', 'north': 'torture', 'west': 'empty', 'contents': ['sheets', 'bed'],
-        'text': 'This is clearly a bedroom, but no one has slept\nhere in a long time.'}}
+rooms = {
+    'empty': {
+        'name': 'an empty room'
+        ,'east': 'bedroom'
+        ,'north': 'temple'
+        ,'contents': []
+        ,'text': 'The stone floors and walls are cold and damp.'
+    }
+    ,'temple': {
+        'name': 'a small temple'
+        ,'east': 'torture'
+        ,'south': 'empty'
+        ,'text': 'This seems to be a place of worship and deep contemplation.'
+        ,'contents': ['bench', 'bench', 'bench', 'statue']
+    },
+    'torture': {
+        'name': 'a torture chamber'
+        ,'west': 'temple'
+        ,'south': 'bedroom'
+        ,'contents': ['chains', 'thumbscrews']
+        ,'text': 'There is a rack and an iron maiden against the wall\naand some dark stains on the floor.'
+    }
+    ,'bedroom': {
+        'name': 'a bedroom'
+        ,'north': 'torture'
+        ,'west': 'empty'
+        ,'contents': ['sheets', 'bed']
+        ,'text': 'This is clearly a bedroom, but no one has slept\nhere in a long time.'
+    }
+}
 inventory = []
 directions = ['north', 'south', 'east', 'west']
 current_room = rooms['empty']
@@ -28,4 +51,17 @@ current_room = rooms['empty']
 while True:
     # so where are you?
     print()
-    print('You are in {}.'.format(current_room['name']))
+    print("You're currently in the {}.".format(current_room['name']))
+
+    current = "empty"
+    action = input("Where do you want to go? ").lower()
+    if action[0:4] == 'take ':
+        item = action[4:]
+        for c in rooms[current][contents]:
+            if c == item:
+                inventory.append(item)
+                rooms[current][contents].remove(item)
+    if (action in directions and action not in rooms[current]):
+        print("You can't go that way!")
+    else:
+        current = rooms[current][action]
