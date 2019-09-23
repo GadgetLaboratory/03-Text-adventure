@@ -16,48 +16,67 @@ class Item: #define flavor, effects, uses
 class Equipment: #define flavor, effects, stats changes
     def __init__(self, flavor, effect, stat):
 
-#edit the below please and make the places ferial places
 rooms = {
     'placeholder': {
-        'name': 'a forbidden place'
-        ,'north': 'glitch'
-        ,'south': 'glitch'
-        ,'east': 'glitch'
-        ,'west': 'glitch'
-        ,'contents': []
-        ,'desc': 'The stone floors and walls are cold and damp.'
+        'name': 'in a forbidden place',
+        'desc': """Do not look.  Leave.""",
+        'contents': [],
+        'north': 'glitch',
+        'south': 'glitch',
+        'east': 'glitch',
+        'west': 'glitch',
     },
     'A2': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
+        'name': 'near the temple gate',
+        'desc': """The gateway leading to this rocky temple is sealed off by runes.
+        Moonrunes, you're temped to call them.  You normally won't understand them.
+        There's a bow-wielding Ferial standing guard here, it seems.""",
+        'contents': [],
+        'south': 'A3',
+        'east': 'B2',
     },
     'A3': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
+        'name': 'on the road to the temple (nearby)',
+        'desc': """There isn't much to be made out about this road as its dust escapes from
+        under your feet, but you can see a rocky temple in the distance.
+        You'll get there soon, but if you don't know why you're going there,
+        you probably don't have business there.""",
+        'contents': [],
+        'north': 'A2',
+        'south': 'A4',
     },
     'A4': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
+        'name': 'on the road to the temple',
+        'desc': """There isn't much to be made out about this road as its dust escapes from
+        under your feet, but you can see a rocky temple in the distance.
+        You'll get there soon, but if you don't know why you're going there,
+        you probably don't have business there.""",
+        'contents': [],
+        'north': 'A3',
+        'south': 'A5',
     },
     'A5': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
+        'name': 'on the road to the temple (distant)',
+        'desc': """There isn't much to be made out about this road as its dust escapes from
+        under your feet, but you can see a rocky temple in the distance.
+        You'll get there soon, but if you don't know why you're going there,
+        you probably don't have business there.""",
+        'contents': [],
+        'north': 'A4',
+        'south': 'A6',
     },
     'A6': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
+        'name': 'near the big field (west)',
+        'desc': """Looking around, the road to some stony temple is just up to the north.
+        The big field is to the south, where a lot of creatures seem to roam.""",
+        'contents': [],
+        'north': 'A5',
+        'south': 'A7',
+        'east': 'B6',
     },
     'A7': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'A8': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'A9': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
+        'name': 'in the big field (west)'
+        ,'desc': "You're in a vast field.  Creatures might pop up to say hello, here."
     },
     'B1': {
         'name': ''
@@ -76,14 +95,6 @@ rooms = {
         ,'desc': 'The stone floors and walls are cold and damp.'
     },
     'B7': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'B8': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'B9': {
         'name': ''
         ,'desc': 'The stone floors and walls are cold and damp.'
     },
@@ -111,14 +122,6 @@ rooms = {
         'name': ''
         ,'desc': 'The stone floors and walls are cold and damp.'
     },
-    'C8': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'C9': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
     'D1': {
         'name': ''
         ,'desc': 'The stone floors and walls are cold and damp.'
@@ -136,14 +139,6 @@ rooms = {
         ,'desc': 'The stone floors and walls are cold and damp.'
     },
     'D7': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'D8': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'D9': {
         'name': ''
         ,'desc': 'The stone floors and walls are cold and damp.'
     },
@@ -171,14 +166,6 @@ rooms = {
         'name': ''
         ,'desc': 'The stone floors and walls are cold and damp.'
     },
-    'E8': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'E9': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
     'F1': {
         'name': ''
         ,'desc': 'The stone floors and walls are cold and damp.'
@@ -188,14 +175,6 @@ rooms = {
         ,'desc': 'The stone floors and walls are cold and damp.'
     },
     'F5': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'F8': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'F9': {
         'name': ''
         ,'desc': 'The stone floors and walls are cold and damp.'
     },
@@ -212,93 +191,41 @@ rooms = {
         ,'desc': 'The stone floors and walls are cold and damp.'
     },
     'G7': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'G8': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'G9': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'H1': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'H2': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'H5': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'H8': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'H9': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'I2': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'I3': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'I4': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'I5': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'I6': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'I7': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'I8': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    },
-    'I9': {
-        'name': ''
-        ,'desc': 'The stone floors and walls are cold and damp.'
-    }
-
-    
+        'name': '',
+        'desc': 'The stone floors and walls are cold and damp.',
+    } 
 }
+
+
+
+game = "not win"
 inventory = []
 directions = ['north', 'south', 'east', 'west']
-current_room = rooms['empty']
+current_room = rooms['C5']
 combat = False
 
-#here's the gaem
-while combat == False:
-    # so where are you?
-    print()
-    print("You're currently in the {}.".format(current_room['name']))
+def randomEncounter():
+    
 
-    current = "empty"
-    action = input("What to do...? ").lower()
-    if action[0:4] == 'take ':
-        item = action[4:]
-        for c in rooms[current]['contents']:
-            if c == item:
-                inventory.append(item)
-                rooms[current]['contents'].remove(item)
-    if action[0:4] == 'take ':
-        if (action in directions and action not in rooms[current]):
-            print("You can't go that way!")
-    else:
-        current = rooms[current][action]
+#here's the gaem
+while game != "win":
+    while combat == False:
+        # so where are you?
+        print()
+        print("You're currently {}.".format(current_room['name']))
+
+        current_room = "empty"
+        action = input("What to do...? ").lower()
+        if "look" or "look around" in action:
+            print(rooms[current_room['desc']])
+        elif "take" in action:
+            item = action[4:]
+            for c in rooms[current_room]['contents']:
+                if c == item:
+                    inventory.append(item)
+                    rooms[current_room]['contents'].remove(item)
+        elif action[0:4] == 'take ':
+            if (action in directions and action not in rooms[current_room]):
+                print("You can't go that way!")
+        else:
+            current_room = rooms[current_room][action]
