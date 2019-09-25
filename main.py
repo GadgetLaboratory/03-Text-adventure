@@ -75,8 +75,12 @@ rooms = {
         'east': 'B6',
     },
     'A7': {
-        'name': 'in the big field (west)'
-        ,'desc': "You're in a vast field.  Creatures might pop up to say hello, here."
+        'name': 'in the big field (west)',
+        'desc': "You're in a vast field.  Creatures might pop up to say hello, here.",
+        'contents': [],
+        'north': '',
+        'south': '',
+        'east': '',
     },
     'B1': {
         'name': ''
@@ -204,6 +208,7 @@ directions = ['north', 'south', 'east', 'west']
 current_room = rooms['C5']
 combat = False
 
+#deciding when random encounters will happen, in certain areas
 def randomEncounter():
     
 
