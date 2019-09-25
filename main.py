@@ -77,10 +77,9 @@ rooms = {
     'A7': {
         'name': 'in the big field (west)',
         'desc': "You're in a vast field.  Creatures might pop up to say hello, here.",
-        'contents': [],
-        'north': '',
-        'south': '',
-        'east': '',
+        'contents': ['berry'],
+        'north': 'A6',
+        'east': 'B7',
     },
     'B1': {
         'name': ''
@@ -209,12 +208,16 @@ current_room = rooms['C5']
 combat = False
 
 #deciding when random encounters will happen, in certain areas
-def randomEncounter():
+def randomEncounter(pChance):
     
 
 #here's the gaem
 while game != "win":
     while combat == False:
+        if current_room in [rooms[], rooms[], rooms[], rooms[], rooms[], rooms[], rooms[], rooms[],]:
+            randomEncounter(20)
+            if combat == True:
+                break
         # so where are you?
         print()
         print("You're currently {}.".format(current_room['name']))
