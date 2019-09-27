@@ -16,7 +16,7 @@ class Character: #define stats here: name, about, health, energy, strength, defe
         self.quote = quote
 
 #characters:
-# player, gadgy, pandorah, rochelle, forrest, garnet,
+# player, gadgy, pandorah, rochelle, forrest, garnet, bianca,
 #  wildcat, crystal, ghost, golem, wight, ancestor, recruit, vergil
 
 class Skill: #define flavor, power, effects, type, element
@@ -33,6 +33,7 @@ rooms = {
         'name': 'in a forbidden place',
         'desc': """Do not look.  Leave.""",
         'contents': [],
+        'people': [],
         'enemy': [],
         'north': 'glitch',
         'south': 'glitch',
@@ -45,6 +46,7 @@ rooms = {
         Moonrunes, you're temped to call them.  You normally won't understand them.
         There's a bow-wielding Ferial standing guard here, it seems.""",
         'contents': [],
+        'people': [garnet]
         'south': 'A3',
         'east': 'B2',
     },
@@ -55,6 +57,7 @@ rooms = {
         You'll get there soon, but if you don't know why you're going there,
         you probably don't have business there.""",
         'contents': [],
+        'people': [],
         'north': 'A2',
         'south': 'A4',
     },
@@ -65,6 +68,7 @@ rooms = {
         You'll get there soon, but if you don't know why you're going there,
         you probably don't have business there.""",
         'contents': [],
+        'people': [],
         'north': 'A3',
         'south': 'A5',
     },
@@ -75,6 +79,7 @@ rooms = {
         You'll get there soon, but if you don't know why you're going there,
         you probably don't have business there.""",
         'contents': [],
+        'people': [],
         'north': 'A4',
         'south': 'A6',
     },
@@ -83,6 +88,7 @@ rooms = {
         'desc': """Looking around, the road to some stony temple is just up to the north.
         The big field is to the south, where a lot of creatures seem to roam.""",
         'contents': [],
+        'people': [],
         'north': 'A5',
         'south': 'A7',
         'east': 'B6',
@@ -93,7 +99,8 @@ rooms = {
         though the welcomings they give you probably won't be gentle.
         There's a plump-looking berry here if you want to be the risk-taker that grabs it.""",
         'contents': [berry],
-        'enemy': wildcat,
+        'people': [],
+        'enemy': [wildcat],
         'north': 'A6',
         'east': 'B7',
     },
@@ -102,7 +109,8 @@ rooms = {
         'desc': """As you enter this portion of the temple, you can hear sounds from elsewhere within.
         They resemble the sounds of battle.  Someone else is here, and you might just know who.""",
         'contents': [],
-        'enemy': ghost,
+        'people': [],
+        'enemy': [ghost],
         'south': 'B2',
         'east': 'C1',
     },
@@ -113,7 +121,8 @@ rooms = {
         There's a sealed wall to the west of you, unless you've done away with it already.
         If you haven't... the Moonstone is probably there.  How to open the wall...?""",
         'contents': [],
-        'enemy': ghost,
+        'people': [],
+        'enemy': [ghost],
         'north': 'B1',
         'south': 'B3',
     },
@@ -123,7 +132,8 @@ rooms = {
         Whispers, calling out to you... imploring for your assistance.
         There's something jutting out to the east.""",
         'contents': [],
-        'enemy': ghost,
+        'people': [],
+        'enemy': [ghost],
         'north': 'B2',
         'east': 'C3',
     },
@@ -132,6 +142,7 @@ rooms = {
         'desc': """Looking around, the infirmary in which you woke up is just a short way east.
         The big field is to the south, where a lot of creatures seem to roam.""",
         'contents': [],
+        'people': [],
         'south': 'B7',
         'west': 'A6',
         'east': 'C6',
@@ -142,7 +153,8 @@ rooms = {
         though the welcomings they give you probably won't be gentle.
         There's something glittering in the ground, here -- a ruby.""",
         'contents': [ruby],
-        'enemy': crystal,
+        'people': [],
+        'enemy': [crystal],
         'north': 'B6',
         'east': 'C7',
     },
@@ -153,7 +165,8 @@ rooms = {
         However, you don't think you have enough strength to depress it.
         ...That golem over there might.  But you won't be able to just strike up a conversation and ask it.""",
         'contents': [],
-        'enemy': golem,
+        'people': [],
+        'enemy': [golem],
         'west': 'B1',
         'east': 'D1',
     },
@@ -168,7 +181,8 @@ rooms = {
         So what's stopping you?
         Reach out and touch it.""",
         'contents': [moonstone],
-        'enemy': vergil,
+        'people': [vergil],
+        'enemy': [vergil],
         'west': 'B2',
     },
     'C3': {
@@ -178,7 +192,8 @@ rooms = {
         Further, there's a lever within the wall, probably to trigger some sort of mechanism.
         You wonder if this will open the gate.  Probably!  It's worth a shot, right?""",
         'contents': [],
-        'enemy': golem,
+        'people': [],
+        'enemy': [golem],
         'west': 'B3',
         'east': 'D3',
     },
@@ -186,12 +201,16 @@ rooms = {
         'name': 'in the infirmary',
         'desc': """Looking around the infirmary, you can tell that it's very well-kept.  It makes sense,
         given how people are brought here for medical care.  It wouldn't do for it to be horrible.""",
+        'contents': [],
+        'people': [],
+        'south': 'C6',
     },
     'C6': {
         'name': 'near the big field (center-east)',
         'desc': """You're just in front of the infirmary you woke up in -- that place is just north of here.
         The big field is to the south, where a lot of creatures seem to roam.""",
         'contents': [],
+        'people': [],
         'south': 'C7',
         'west': 'B6',
         'east': 'D6',
@@ -201,7 +220,8 @@ rooms = {
         'desc': """You're in a vast field.  Creatures might pop up to say hello, here...
         though the welcomings they give you probably won't be gentle.""",
         'contents': [apple, apple, apple, apple],
-        'enemy': wildcat,
+        'people': [],
+        'enemy': [wildcat],
         'north': 'C6',
         'east': 'D7',
     },
@@ -214,7 +234,8 @@ rooms = {
         ...Also, there's some guy in a black jacket here and no shirt beneath.  When he sees you,
         he glares at you with palpable ferocity.""",
         'contents': [],
-        'enemy': recruit,
+        'people': [],
+        'enemy': [recruit],
         'south': 'D2',
         'west': 'C1',
     },
@@ -225,7 +246,8 @@ rooms = {
         They seem preserved incredibly well, though... in fact, you feel some sort of gaze from that way.
         Leave.""",
         'contents': [],
-        'enemy': ancestor,
+        'people': [],
+        'enemy': [ancestor],
         'north': 'D1',
         'south': 'D3',
     },
@@ -233,9 +255,9 @@ rooms = {
         'name': 'in the Moonstone Temple (SE)',
         'desc': """There are bodies here -- potentially those that entered this place simply for kicks,
         or on an objective to steal the Moonstone.  Given what you've seen so far in this place, it
-        probably wouldn't surprise you if one of them jumped up and triedto make you join them.""",
+        probably wouldn't surprise you if one of them jumped up and tried to make you join them.""",
         'contents': [],
-        'enemy': wight,
+        'enemy': [wight],
         'north': 'D2',
         'west': 'C3',
     },
@@ -244,6 +266,7 @@ rooms = {
         'desc': """Looking around, the infirmary in which you woke up is just a short way west.
         The big field is to the south, where a lot of creatures seem to roam.""",
         'contents': [],
+        'people': [],
         'south': 'D7',
         'west': 'C6',
         'east': 'E6',
@@ -254,57 +277,94 @@ rooms = {
         though the welcomings they give you probably won't be gentle.
         Somebody's just chilling out here, a young Ferial boy.""",
         'contents': [],
-        'people': forrest,
+        'people': [forrest],
         'north': 'C6',
         'east': 'D7',
     },
-    'E1': {
-        'name': '',
-        'desc': """""",
-    },
     'E2': {
-        'name': '',
+        'name': 'on the main street (north)',
         'desc': """""",
+        'contents': [],
+        'people': [],
+        'south': 'E3',
+        'east': 'F2'
     },
     'E3': {
-        'name': '',
+        'name': 'on the main street (center-north)',
         'desc': """""",
+        'contents': [],
+        'people': [],
+        'north': 'E2',
+        'south': 'E4',
     },
     'E4': {
-        'name': '',
+        'name': 'on the main street (center)',
         'desc': """""",
+        'contents': [],
+        'people': [],
+        'north': 'E3',
+        'south': 'E5',
+        'east': 'F4',
     },
     'E5': {
-        'name': '',
+        'name': 'on the main street (center-south)',
         'desc': """""",
+        'contents': [],
+        'people': [],
+        'north': 'E4',
+        'south': 'E6',
     },
     'E6': {
-        'name': '',
+        'name': 'on the main street (south)',
         'desc': """""",
-    },
-    'F1': {
-        'name': '',
-        'desc': """""",
+        'contents': [],
+        'people': [],
+        'north': 'E5',
+        'east': 'F6',
+        'west': 'D6',
     },
     'F2': {
-        'name': '',
+        'name': 'near the Turntide household',
         'desc': """""",
+        'contents': [],
+        'people': [],
+        'east': 'G2',
+        'west': 'E2',
     },
-    'F5': {
-        'name': '',
+    'F4': {
+        'name': 'near the Dojo',
         'desc': """""",
+        'contents': [],
+        'people': [],
+        'east': 'G4',
+        'west': 'E4',
+    },
+    'F6': {
+        'name': 'near the Warehouse',
+        'desc': """""",
+        'contents': [],
+        'people': [],
+        'east': 'G6',
+        'west': 'E6',
     },
     'G2': {
-        'name': '',
+        'name': 'in the Turntide House.',
         'desc': """""",
+        'contents': [],
+        'people': [gadgy, pandorah],
+        'west': 'F2',
     },
     'G4': {
-        'name': '',
+        'name': 'in the Dojo.',
         'desc': """""",
+        'contents': [],
+        'people': [rochelle]
+        'west': 'F4',
     },
-    'G5': {
-        'name': '',
+    'G6': {
+        'name': 'in the Warehouse',
         'desc': """""",
+        'west': 'F6',
     },
 }
 
@@ -315,8 +375,9 @@ inventory = []
 directions = ['north', 'south', 'east', 'west']
 current_room = rooms['C5']
 combat = False
+ene = None
 kills = 0
-atrPoints = 0
+atrPoints = 10
 sklPoints = 0
 
 #deciding when random encounters will happen, in certain areas
@@ -324,15 +385,40 @@ def randomEncounter(pChance, enemy):
     enemyChance = random.randint(0, 100)
     if enemyChance <= pChance:
         combat = True
-        return str("You've been discovered by {}.".format(current_room['enemy']))
+        print(str("You've been discovered by {}.".format(current_room['enemy'])))
+        print(current_room['enemy'['quote'])
     else:
         pass
+
+def startEncounter(chara):
+    combat = True
+    return str("{} will be your opponent!".format(chara.name))
 
 def unlockMoonstone():
     rooms['B2'].update({'east':'C2'})
 
-#how do we wake up and allocate our atrPoints?
+def killCharacter(chara):
+    current_room['people'].remove(chara)
+    current_room['enemy'].remove(chara)
+    #killer queen has touched this character
 
+#how do we wake up? (and allocate our atrPoints?)
+print("""Your entire arm aches... buuut at least it feels better than it did.""")
+print()
+print()
+print()
+print()
+print()
+print()
+print()
+print()
+print()
+print()
+print()
+print()
+print()
+print()
+print()
 
 #here's the gaem
 while game != "win":
