@@ -1,0 +1,38 @@
+Name: Cortland Brock
+Date: 9/28/19
+Project: P03-Text adventure
+Peer's repository: Larry H.
+
+
+
+What is something you learned by reviewing your peer's project?
+I learned how to structue this assignment into an RPG in stead of the murder mystery I had made.
+ 
+
+What is something you saw in your peer's project that you would like to apply to your own programming projects?
+After looking at my peer's project I might try putting items in my game.
+ 
+
+What suggestions would you have for your peer to improve his/her code?
+I think that this persons text adventure game is really good but I cant seem to get it to run on my computer so this person could improve their code by testing it for bugs.
+ 
+
+What could have been clearer or better commented?
+I think the game objective/ win condition  could have been clearer mabybe have a comment mentioning it when the game starts up and I was a little confused of how the skills worked I think Larry should comment on them  
+ 
+
+Was there anything in the code that was confusing to you? If so, what?
+When I opened up this persons game I was surprized I dint see a separate json file in the explorer menu in the left hand side of the screen.
+ 
+
+Does the repository contain an appropriate LICENSE?
+I would say this person's LICENSE is good but I would tell them to put their full name in the LICENSE next time just to clear up any confusion
+ 
+
+What is something he/she could add to the README.md to make it more descriptive?
+If this person wanted to add more to their README I would tell them they could describe their game in the README almost like a trailer
+ 
+
+Pay a compliment to your peer based on the quality of his/her code.
+When I first started working on this assgnment I saw that the game wasnt finished and needed a lot of work but when I reopened the assignment today I could really see that this person put a lot of time into their game. Now having done this assignment myself I know just how challenging a jump it was to start working on our first game in this class and I think this person did an exellent job taking advantage of the opportunity to execute a game. 
+
