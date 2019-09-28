@@ -16,7 +16,7 @@ class Character: #define stats here: name, about, health, energy, strength, defe
         self.quote = quote
 
 #characters:
-# player, gadgy, pandorah, rochelle, forrest, garnet, bianca,
+# player, laurent, pandorah, rochelle, forrest, garnet, bianca,
 #  wildcat, crystal, ghost, golem, wight, ancestor, recruit, vergil
 
 class Skill: #define flavor, power, effects, type, element
@@ -200,9 +200,13 @@ rooms = {
     'C5': {
         'name': 'in the infirmary',
         'desc': """Looking around the infirmary, you can tell that it's very well-kept.  It makes sense,
-        given how people are brought here for medical care.  It wouldn't do for it to be horrible.""",
-        'contents': [],
-        'people': [],
+        given how people are brought here for medical care.  It wouldn't do for it to be horrible.
+        Bianca, the cowgirl who tended to you, is still here, supervising and taking care of others as well.
+        Somebody left a couple of shots around here, one blue and one pink.  But is it really wise
+        to be taking random medical supplies?
+        Well, they must not be super-dangerous if they were forgotten about...""",
+        'contents': [blueshot, pinkshot],
+        'people': [bianca],
         'south': 'C6',
     },
     'C6': {
@@ -283,7 +287,11 @@ rooms = {
     },
     'E2': {
         'name': 'on the main street (north)',
-        'desc': """""",
+        'desc': """The main street of the Ferial village.  Here, you can see several Ferials just
+        strolling about, going on their day.  Their culture doesn't really seem too different from
+        human culture, when you look at it.  It's like its own world parallel to the normal world.
+        ...Sadly, you've heard that it isn't always quite that peaceful.
+        Coming up on the east is the Turntide household.""",
         'contents': [],
         'people': [],
         'south': 'E3',
@@ -291,7 +299,10 @@ rooms = {
     },
     'E3': {
         'name': 'on the main street (center-north)',
-        'desc': """""",
+        'desc': """The main street of the Ferial village.  Here, you can see several Ferials just
+        strolling about, going on their day.  Their culture doesn't really seem too different from
+        human culture, when you look at it.  It's like its own world parallel to the normal world.
+        ...Sadly, you've heard that it isn't always quite that peaceful.""",
         'contents': [],
         'people': [],
         'north': 'E2',
@@ -299,7 +310,11 @@ rooms = {
     },
     'E4': {
         'name': 'on the main street (center)',
-        'desc': """""",
+        'desc': """The main street of the Ferial village.  Here, you can see several Ferials just
+        strolling about, going on their day.  Their culture doesn't really seem too different from
+        human culture, when you look at it.  It's like its own world parallel to the normal world.
+        ...Sadly, you've heard that it isn't always quite that peaceful.
+        Coming up on the east is the training dojo that the Turntides founded.""",
         'contents': [],
         'people': [],
         'north': 'E3',
@@ -308,7 +323,10 @@ rooms = {
     },
     'E5': {
         'name': 'on the main street (center-south)',
-        'desc': """""",
+        'desc': """The main street of the Ferial village.  Here, you can see several Ferials just
+        strolling about, going on their day.  Their culture doesn't really seem too different from
+        human culture, when you look at it.  It's like its own world parallel to the normal world.
+        ...Sadly, you've heard that it isn't always quite that peaceful.""",
         'contents': [],
         'people': [],
         'north': 'E4',
@@ -316,7 +334,11 @@ rooms = {
     },
     'E6': {
         'name': 'on the main street (south)',
-        'desc': """""",
+        'desc': """The main street of the Ferial village.  Here, you can see several Ferials just
+        strolling about, going on their day.  Their culture doesn't really seem too different from
+        human culture, when you look at it.  It's like its own world parallel to the normal world.
+        ...Sadly, you've heard that it isn't always quite that peaceful.
+        Coming up on the east is the supply warehouse, used for several different things.""",
         'contents': [],
         'people': [],
         'north': 'E5',
@@ -325,7 +347,9 @@ rooms = {
     },
     'F2': {
         'name': 'near the Turntide household',
-        'desc': """""",
+        'desc': """Coming off of the main street, you're near the Turntide house.  From here, it seems
+        like a decent enough place, although there's very little in the way of decoration.
+        You wonder what the Turntides are like...""",
         'contents': [],
         'people': [],
         'east': 'G2',
@@ -333,7 +357,9 @@ rooms = {
     },
     'F4': {
         'name': 'near the Dojo',
-        'desc': """""",
+        'desc': """Coming off of the main street, you're near the dojo.  They say the eldest child of the
+        Turntide couple trains here constantly and is surpassing limits that no other Ferial had
+        even come close to before.  She is incredibly dedicated...""",
         'contents': [],
         'people': [],
         'east': 'G4',
@@ -341,7 +367,9 @@ rooms = {
     },
     'F6': {
         'name': 'near the Warehouse',
-        'desc': """""",
+        'desc': """Coming off of the main street, you're near the supply warehouse.  It's simple, wooden,
+        and gets the job done.  It's also big.
+        ...It also doesn't sound like there's anyone inside...""",
         'contents': [],
         'people': [],
         'east': 'G6',
@@ -349,21 +377,34 @@ rooms = {
     },
     'G2': {
         'name': 'in the Turntide House.',
-        'desc': """""",
+        'desc': """Welcom to the Turntide House!
+        There's such a warm atmosphere here.  Understandable, since, from what you've heard, there's a very
+        big family that lives here.  Most of them seem to be away right now, though, which explains why
+        your ears aren't being assaulted by clamor.  There's only the main two parents here:
+        Laurent and Pandorah.""",
         'contents': [],
-        'people': [gadgy, pandorah],
+        'people': [laurent, pandorah],
         'west': 'F2',
     },
     'G4': {
         'name': 'in the Dojo.',
-        'desc': """""",
+        'desc': """As you enter the dojo, you hear something break apart.  A very rough and fit female
+        Ferial has just destroyed a training dummy with a loud punch of great magnitude.
+        You've heard of her name.  Rochelle.  From what she looks like, maybe the rumors
+        of her strength aren't entirely conjecture...""",
         'contents': [],
         'people': [rochelle]
         'west': 'F4',
     },
     'G6': {
         'name': 'in the Warehouse',
-        'desc': """""",
+        'desc': """The air is warm and dry in here.  And the amount of supplies is high as hell.
+        It's sorted to a degree, but there's so much of a surplus here that it's kind of all over
+        the place.  Surely they wouldn't notice if you borrowed something for just long enough
+        to get your whole turning-back-to-normal thing over with.
+        There's a stray dagger, malachite, candy, and a book, for example.""",
+        'contents': [dagger, malachite, candy, book],
+        'people': [],
         'west': 'F6',
     },
 }
