@@ -4,7 +4,9 @@
 
 import sys, logging, json, random
 
-class Character: #define stats here: name, about, health, energy, strength, defense, agility
+######################### == CLASSES == #########################
+
+class Character:
     def __init__(self, name, about, hp, mp, atk, vit, agi, quote):
         self.name = name
         self.about = about
@@ -19,14 +21,48 @@ class Character: #define stats here: name, about, health, energy, strength, defe
 # player, laurent, pandorah, rochelle, forrest, garnet, bianca,
 #  wildcat, crystal, ghost, golem, wight, ancestor, recruit, vergil
 
-class Skill: #define flavor, power, effects, type, element
-    def __init__(self, flavor, power, effect, type, element):
+class Skill:
+    def __init__(self, flavor, power, effect, typing, element):
+        self.flavor = flavor
+        self.power = power
+        self.effect = effect
+        self.typing = typing
+        self.element = element
+
+#skills:
+# 
+#  
 
 class Item: #define flavor, effects, uses
+    #Reminder!  Define an inventory!
     def __init__(self, flavor, effect, uses):
+        self.flavor = flavor
+        self.effect = effect
+        self.uses = uses
+
+#items:
+# 
+#  
 
 class Equipment: #define flavor, effects, stats changes
     def __init__(self, flavor, effect, stat):
+        self.flavor = flavor
+        self.effect = effect
+        self.stat = stat
+
+#equipment:
+# 
+#  
+
+######################### == CHARACTERS == #########################
+
+######################### == SKILLS == #########################
+
+######################### == ITEMS == #########################
+
+######################### == EQUIPMENT == #########################
+
+######################### == ROOMS == #########################
 
 rooms = {
     'placeholder': {
@@ -46,7 +82,7 @@ rooms = {
         Moonrunes, you're temped to call them.  You normally won't understand them.
         There's a bow-wielding Ferial standing guard here, it seems.""",
         'contents': [],
-        'people': [garnet]
+        'people': [garnet],
         'south': 'A3',
         'east': 'B2',
     },
@@ -231,11 +267,11 @@ rooms = {
     },
     'D1': {
         'name': 'in the Moonstone Temple (NE)',
-        'desc': """Religious practices seem to be conducted in this temple, you figure.
+        'desc': """Religious practices seem to be (or were) conducted in this temple, you figure.
         I mean, it makes sense -- it IS a temple.  But here is different, for some reason.
         The paintings on these walls depict battles under some divine figure.  That's
         one way to show faith, you suppose.
-        ...Also, there's some guy in a black jacket here and no shirt beneath.  When he sees you,
+        ...Also, there's some fit guy in a black jacket here and no shirt beneath.  When he sees you,
         he glares at you with palpable ferocity.""",
         'contents': [],
         'people': [],
@@ -393,15 +429,15 @@ rooms = {
         You've heard of her name.  Rochelle.  From what she looks like, maybe the rumors
         of her strength aren't entirely conjecture...""",
         'contents': [],
-        'people': [rochelle]
+        'people': [rochelle],
         'west': 'F4',
     },
     'G6': {
         'name': 'in the Warehouse',
         'desc': """The air is warm and dry in here.  And the amount of supplies is high as hell.
         It's sorted to a degree, but there's so much of a surplus here that it's kind of all over
-        the place.  Surely they wouldn't notice if you borrowed something for just long enough
-        to get your whole turning-back-to-normal thing over with.
+        the place.  Nobody's in right now, either. Surely they wouldn't notice if you borrowed
+        something for just long enough to get your whole turning-back-to-normal thing over with.
         There's a stray dagger, malachite, candy, and a book, for example.""",
         'contents': [dagger, malachite, candy, book],
         'people': [],
@@ -409,9 +445,7 @@ rooms = {
     },
 }
 
-
-
-game = "not win"
+game = "start"
 inventory = []
 directions = ['north', 'south', 'east', 'west']
 current_room = rooms['C5']
@@ -427,7 +461,7 @@ def randomEncounter(pChance, enemy):
     if enemyChance <= pChance:
         combat = True
         print(str("You've been discovered by {}.".format(current_room['enemy'])))
-        print(current_room['enemy'['quote'])
+        print(current_room['enemy'['quote']])
     else:
         pass
 
@@ -462,11 +496,13 @@ print()
 print()
 
 #here's the gaem
-while game != "win":
-    if current_room in [rooms[], rooms[], rooms[], rooms[], rooms[], rooms[], rooms[], rooms[] ]:
-        randomEncounter(20)
+while game == "not win":
     while combat == False:
-        # so where are you?
+        if current_room in [rooms['A7'], rooms['B1'], rooms['B2'], rooms['B3'],
+        rooms['B7'], rooms['C7'], rooms['D2'], rooms['D3'], [rooms['D7']]]:
+            randomEncounter(20)
+            if combat == True:
+                break
         print()
         print("You're currently {}.".format(current_room['name']))
         if atrPoints > 0:
@@ -491,4 +527,6 @@ while game != "win":
         else:
             current_room = rooms[current_room][action]
     while combat == True:
-        #actions: attack, block, skill, item, run
+        #actions: attack, block, skill, item, run (prompt)
+        #have a function to return list of sub-options that are matched to numbers
+        #have a way to log turns, health, energy, skills
