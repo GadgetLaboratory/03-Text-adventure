@@ -6,63 +6,241 @@ import sys, logging, json, random
 
 ######################### == CLASSES == #########################
 
+class Skill:
+    """
+    Creates skill objects that can be called upon in battle for the cost of EP.
+
+    flavor, effect = str | power = int | tooltips = list of strings
+    """
+    def __init__(self, flavor, power, effect, tooltips):
+        self.flavor = flavor
+        self.power = power
+        self.effect = effect
+        self.tooltips = tooltips
+
+class Item: 
+    """
+    Creates item objects that can be used from the inventory at any time, whether in or out of battle.
+
+    flavor, effect, isEquip (see comment) = str | uses = int
+    """
+    def __init__(self, flavor, effect, uses, isEquip):
+        self.flavor = flavor
+        self.effect = effect
+        self.uses = uses
+        self.isEquip = isEquip #designate 'weapon', 'armor', 'charm', or None, and go on:
+                                #set equip function; if equipped to [space], apply stat boosts
+
 class Character:
-    def __init__(self, name, about, hp, mp, atk, vit, agi, quote):
+    """
+    Creates characters in the game.  Most of these characters can be fought, but are unnecessary to.
+
+    name, about, quote = str | hp, ep, atk, vit, agi = int | skills = list
+    """
+    def __init__(self, name, about, hp, ep, atk, vit, agi, quote, skills):
         self.name = name
         self.about = about
         self.hp = hp
-        self.mp = mp
+        self.ep = ep
         self.atk = atk
         self.vit = vit
         self.agi = agi
         self.quote = quote
+        self.skills = skills
 
-#characters:
-# player, laurent, pandorah, rochelle, forrest, garnet, bianca,
-#  wildcat, crystal, ghost, golem, wight, ancestor, recruit, vergil
+######################## == COMMANDS == #########################
 
-class Skill:
-    def __init__(self, flavor, power, effect, typing, element):
-        self.flavor = flavor
-        self.power = power
-        self.effect = effect
-        self.typing = typing
-        self.element = element
+#actions: attack, block, skill, item, run (prompt)
 
-#skills:
-# 
-#  
-
-class Item: #define flavor, effects, uses
-    #Reminder!  Define an inventory!
-    def __init__(self, flavor, effect, uses):
-        self.flavor = flavor
-        self.effect = effect
-        self.uses = uses
-
-#items:
-# 
-#  
-
-class Equipment: #define flavor, effects, stats changes
-    def __init__(self, flavor, effect, stat):
-        self.flavor = flavor
-        self.effect = effect
-        self.stat = stat
-
-#equipment:
-# 
-#  
-
-######################### == CHARACTERS == #########################
 
 ######################### == SKILLS == #########################
 
-######################### == ITEMS == #########################
+doubleStrike = Skill()
 
-######################### == EQUIPMENT == #########################
+flameStrike = Skill()
 
-######################### == ROOMS == #########################
+recover = Skill()
+
+temper = Skill()
+
+tense = Skill()
+
+frenzy = Skill()
+
+ironShatteringStrike = Skill()
+
+sidestep = Skill()
+
+lightBlast = Skill()
+
+darkCall = Skill()
+
+pierce = Skill()
+
+berserkRush = Skill()
+
+berserkInferno = Skill()
+
+######################### == ITEMS == ##########################
+
+#items:
+# berry, blueshot, pinkshot, apple, malachite, candy, book, dagger, ruby, pendant (from Forrest)
+#  moonstone (you win the game if you have this, right)
+
+berry = Item()
+
+blueShot = Item()
+
+pinkShot = Item()
+
+apple = Item()
+
+malachite = Item()
+
+candy = Item()
+
+book = Item()
+
+dagger = Item()
+
+ruby = Item()
+
+pendant = Item()
+
+moonStone = Item()
+
+####################### == CHARACTERS == #######################
+
+# player, pandorah, rochelle, forrest, garnet, bianca,
+#  wildcat, crystal, ghost, golem, wight, ancestor, recruit, vergil
+
+laurent = Character("Laurent 'Gadgy' Turntide",
+    """A tough and playful Ferial that was turned just as you were one day.  He looks a lot
+    more intimidating than he acts, so he's usually just a huggable, coy doggo.
+    Unless you anger him, anyway.""",
+    35, 30,
+    12, 10, 6,
+    "If that's how you're gonna be...",
+    [temper, tense, doubleStrike])
+
+pandorah = Character("Pandorah Allyson Turntide",
+    """An adorable and huggable mother who spent a good deal of her life bettering herself
+    in the ways of battle and now passes some of that knowledge onto her children.""",
+    36, 42,
+    10, 8, 12,
+    "No problem here!"
+    [recover, sidestep, flameStrike])
+
+rochelle = Character("Rochelle Allyson Turntide",
+    """A rough and tough ferial, one daughter of Laurent and Pandorah.  She takes improvement
+    incredibly seriously, as if she were dedicated in mind, heart, and body, to an ultimate goal.""",
+    60, 48,
+    16, 16, 16,
+    "You're really trying to pick a fight with me?"
+    [doubleStrike, flameStrike, sidestep, ironShatteringStrike])
+
+forrest = Character("Forrest Malachite Turntide",
+    """A young Turntide boy, one of Laurent and Pandorah's twin sons.  He looks up to his big
+    sister Rochelle as a fighter and wants to be able to fight alongside her one day.
+    But most of the time he just prefers to relax anyway, so he's got a ways to go.""",
+    25, 22,
+    9, 7, 11,
+    "--W-Wait, huh?!"
+    [sidestep])
+
+garnet = Character("Isabelle 'Garnet' Harding",
+    """Someone who fights alongside the rebel leader, Rochelle, as part of her squadron.
+    She takes her job very seriously, but depends on her leader a little bit too much.""",
+    40, 48,
+    10, 6, 14,
+    "Moron!  I'll skewer you right here!!",
+    [pierce, temper, sidestep])
+
+bianca = Character("Bianca Maye",
+    """A motherly cowgirl that's decided to take time helping in the Ferial village, since
+    times have been tougher than usual.  There's a wonderful soul hidden away behind that
+    significant bust of hers. *snrk*""",
+    65, 25,
+    10, 16, 4,
+    "Goodness, and here I am tryin' to look after these poor folk..."
+    [tense, recover])
+
+wildcat = Character("a stray wildcat",
+    """A beast that strays around, looking for minor prey.  It seems it's decided that's you.
+    If you can endure a round or two, hit it with your toughest attack and it'll be pulverized.""",
+    15, 10,
+    6, 4, 8,
+    "*It locks sights with you, and then pounces!*",
+    [frenzy, sidestep])
+
+crystal = Character("a formation of some magic crystals",
+    """Some sort of magical force is keeping it together... seems like it's asking to be broken, to me.
+    Its defenses are somewhat high for a random creature.  Try breaking through them.""",
+    30, 10,
+    6, 9, 6, #nice
+    "*It's trying to find a signal... and it detects you, as the closest thing!*",
+    [lightBlast, tense])
+
+ghost = Character("a departed spirit",
+    """Seems like this spirit didn't want to head up to Sanctuary.  Make it regret sticking around.
+    Attacking something incorporeal is usually a bad idea.  Just hit it *enough*, unless you can burn it.""",
+    3, 40,
+    8, 25, 7,
+    "Help...",
+    [lightBlast, darkCall])
+
+golem = Character("a golem put together by some spiritual force",
+    """This golem is protecting the temple for a reason; simple precautionary measures, you know.
+    If you want to reach the Moonstone, you'll probably have to take it out.
+    It's a very bulky attacker.  Try breaking through its defenses, if you can.""",
+    40, 20,
+    12, 16, 7,
+    "*Now fully activated, it detects you as an intruder and attacks!*",
+    [recover, doubleStrike])
+
+wight = Character("a greater, skeletal spirit bound to this world by dark means",
+    """A wight that sprang back into the action of life after you came through.
+    It doesn't appreciate intruders...
+    Somewhat of a glass cannon.  You should try to kill it before it kills you, and
+    if you're reading this, you're not on the best start.""",
+    35, 36,
+    16, 9, 12,
+    "Begone...", 
+    [darkCall, temper, pierce, flameStrike])
+
+ancestor = Character("a ghostly Ferial that should be long since dead",
+    """Some sort of long-forgotten Ferial guardian.  Maybe this being had a part in guarding
+    the Moonstone however many generations ago?  Never mind that -- they'll tear you apart.
+    They're incredibly strong all around, but Ferials are all weak to magic in some way.""",
+    38, 30,
+    15, 18, 15,
+    "If you dare to step into this temple, you will prove that you are worthy."
+    [sidestep, recover, tense])
+
+recruit = Character("a recruit of the Human Salvation Brigade",
+    """A raggedy soldier recruited by the man you've heard of as Vergil.  His sort doesn't
+    like Ferials because of the accidents they've caused.  They want to make you pay in blood.
+    Apart from Vergil himself, you probably won't find a tougher opponent -- this one may
+    be worth using your items for.  He'll run out of energy eventually.""",
+    50, 32,
+    16, 12, 18,
+    "Ferial scum.  You'll not interfere with our boss's plan if I have anything to say about it!",
+    [temper, pierce, lightBlast, recover])
+
+vergil = Character("Vergil Rainer Caldwell",
+    """The general of the Human Salvation Brigade.  His ripped figure and his wild, flowing hair
+    and his dark skin all come together to convey the absolute might of him.  What's more, you can
+    feel a burning aura come from him, as if he was on fire.  He's commanding this brigade for
+    a reason, you can tell that now more than ever.
+    Conserve your resources until you've done enough damage to him.  When you have him on the ropes,
+    he'll go berserk.  He is NOT someone that would ever lose to someone he considers below him.""",
+    150, 80,
+    24, 21, 16,
+    "If you won't listen... then you'll DIE like the rest of these mutts!!",
+    [doubleStrike, flameStrike, frenzy, temper]
+    )
+
+######################### == ROOMS == ##########################
 
 rooms = {
     'placeholder': {
@@ -216,7 +394,7 @@ rooms = {
         You couldn't care less about what the Ferials do, honestly.  You just want out of it.
         So what's stopping you?
         Reach out and touch it.""",
-        'contents': [moonstone],
+        'contents': [moonStone],
         'people': [vergil],
         'enemy': [vergil],
         'west': 'B2',
@@ -241,7 +419,7 @@ rooms = {
         Somebody left a couple of shots around here, one blue and one pink.  But is it really wise
         to be taking random medical supplies?
         Well, they must not be super-dangerous if they were forgotten about...""",
-        'contents': [blueshot, pinkshot],
+        'contents': [blueShot, pinkShot],
         'people': [bianca],
         'south': 'C6',
     },
@@ -413,7 +591,7 @@ rooms = {
     },
     'G2': {
         'name': 'in the Turntide House.',
-        'desc': """Welcom to the Turntide House!
+        'desc': """Welcome to the Turntide House!
         There's such a warm atmosphere here.  Understandable, since, from what you've heard, there's a very
         big family that lives here.  Most of them seem to be away right now, though, which explains why
         your ears aren't being assaulted by clamor.  There's only the main two parents here:
@@ -445,39 +623,96 @@ rooms = {
     },
 }
 
+####################### == VARIABLES == ########################
+
 game = "start"
 inventory = []
+# define clause: inventory can only contain 5 items; equipment can be pushed into the designations below
+weapon = []
+armor = []
+charm = []
 directions = ['north', 'south', 'east', 'west']
 current_room = rooms['C5']
+enemy = None
 combat = False
-ene = None
+templeSwitch1 = False
+templeSwitch2 = False
 kills = 0
 atrPoints = 10
 sklPoints = 0
 
+#################### == MISC. FUNCTIONS == #####################
+
 #deciding when random encounters will happen, in certain areas
-def randomEncounter(pChance, enemy):
+def randomEncounter(pChance, enemyA):
     enemyChance = random.randint(0, 100)
     if enemyChance <= pChance:
         combat = True
+        enemy = enemyA
         print(str("You've been discovered by {}.".format(current_room['enemy'])))
         print(current_room['enemy'['quote']])
     else:
         pass
 
+#if you just want to fight somebody
 def startEncounter(chara):
     combat = True
+    enemy = chara
+    print(current_room[chara['quote']])
     return str("{} will be your opponent!".format(chara.name))
 
+#misc. story functions
+# need: when rochelle grants access to the temple (garnet lets you through)
+
+#when both switches in the temple have been activated
 def unlockMoonstone():
     rooms['B2'].update({'east':'C2'})
+    print("""
+    As the other switch is clicked into an active position, you hear gates rumbling near the entrance.  It
+    seems you might have finally unlocked the Moonst--
+    "HEY, THANKS FOR DOING ALL THE WORK!"
+    That's a loud yell you hear all of a sudden, snapping oyu out of your thoughts.  As you look around the
+    corner, there's someone with wild hair and a long, flowing jacket that disappears.  He's heading towards
+    the Moonstone. Is that the guy you were warned about?!  Damn, you've got to catch him!
+    """)
+
+#
+def flipSwitchA():
+    templeSwitch1 = True
+    if templeSwitch1 and templeSwitch2 == True:
+        unlockMoonstone()
+
+def flipSwitchB():
+    templeSwitch2 = True
+    if templeSwitch1 and templeSwitch2 == True:
+        unlockMoonstone()
+
+def berserk():
+    print("""
+    "Hah... hahahahah... you think I'm gonna lose to some random mutt like you?"
+    "Some INSIGNIFICANT, SUBHUMAN WASTE OF SPACE?!  LIKE HELL I'LL EVER BE HUMILIATED LIKE THAT!!"
+    "You're a fuckin' strong mutt to get me pissed off, I'll give you that much!"
+    "BUT THIS IS WHERE YOUR EFFORTS STOP COLD!"
+    "BURN INTO NOTHING!!"
+
+    Vergil's body is taken by a sudden, bright-yellow aura of flame as his eyes shine and his hair
+    almost seems to ignite.  It's almost like the wind is blowing his attire from inside this temple.
+    He wants nothing more than to destroy you, now.
+    """):
+    vergil.hp = 120
+    vergil.ep = 80
+    vergil.skills.remove[flameStrike, frenzy]
+    vergil.skills.append[berserkRush, berserkInferno]
 
 def killCharacter(chara):
     current_room['people'].remove(chara)
     current_room['enemy'].remove(chara)
     #killer queen has touched this character
 
+################### == STARTING SEQUENCE == ####################
+
 #how do we wake up? (and allocate our atrPoints?)
+#define the player as an entity here; store their responses and apply them to an instance of Character after all prompts are answered
 print("""Your entire arm aches... buuut at least it feels better than it did.""")
 print()
 print()
@@ -494,6 +729,17 @@ print()
 print()
 print()
 print()
+player = Character(str(playerName),
+    """You don't remember how you gothere.  All you remember is that you were attacked by
+    another Ferial and woke up as one in the infirmary.  Now, though, you have an opportunity
+    to turn back.  Will you succeed in taking this path?""",
+    playerHealth, playerEnergy, playerAttack, playerVitality, playerAgility
+    "", 
+    [])
+
+######################## == LET'S GO == ########################
+
+game = "not win"
 
 #here's the gaem
 while game == "not win":
@@ -506,7 +752,7 @@ while game == "not win":
         print()
         print("You're currently {}.".format(current_room['name']))
         if atrPoints > 0:
-            print("You have {} power points to allocate.").format(atrPoints)
+            print("You have {} power points to allocate. (use with 'increase [stat]')").format(atrPoints)
 
         current_room = "empty"
         action = input("What to do...? ").lower()
@@ -530,3 +776,11 @@ while game == "not win":
         #actions: attack, block, skill, item, run (prompt)
         #have a function to return list of sub-options that are matched to numbers
         #have a way to log turns, health, energy, skills
+        if player.hp <= 0:
+            game = "over"
+        if enemy.hp <= 0:
+            print(You made it through the fight!)
+            enemy = None
+
+while game == "over":
+    #dead
