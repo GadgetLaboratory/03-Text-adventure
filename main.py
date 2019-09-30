@@ -27,9 +27,16 @@ class Item:
     def __init__(self, flavor, effect, uses, isEquip):
         self.flavor = flavor
         self.effect = effect
-        self.uses = uses
+        self.uses = uses      #if not meant to break, input 999
         self.isEquip = isEquip #designate 'weapon', 'armor', 'charm', or None, and go on:
                                 #set equip function; if equipped to [space], apply stat boosts
+    def use(self):
+        self.uses -= 1
+        print(self.effect)
+        if self.uses == 0:
+            print("This item's run its course.")
+            del self
+
 
 class Character:
     """
@@ -47,6 +54,31 @@ class Character:
         self.agi = agi
         self.quote = quote
         self.skills = skills
+    
+    def attack(self, target):
+        damage = round(self.atk * random.uniform(.75, 1.25)) - round(target.vit * random.uniform(.8, 1.2))
+        if damage < 1: 
+            damage = 1
+        print("{} damage to {}!").format(damage, target.name)
+        target.hp -= damage
+
+    def buff(self, stat, amount):
+        self.stat += amount
+
+    def debuff(self, stat, amount):
+        self.stat -= amount
+    
+    def look(self, enemy): 
+        print(enemy.about)
+
+    def run(self, enemy):
+        print("{} tried to get away...").format(self.name)
+        chance = float(self.agi / enemy.agi)
+        if random.random < chance:
+            print("...and did!")
+            combat = False
+        else: 
+            print("...but couldn't!")
 
 ######################## == COMMANDS == #########################
 
@@ -635,6 +667,7 @@ directions = ['north', 'south', 'east', 'west']
 current_room = rooms['C5']
 enemy = None
 combat = False
+turnNumber = 0
 templeSwitch1 = False
 templeSwitch2 = False
 kills = 0
@@ -661,6 +694,9 @@ def startEncounter(chara):
     print(current_room[chara['quote']])
     return str("{} will be your opponent!".format(chara.name))
 
+def showHealth(chara):
+    print("{} has {} health remaining.").format(chara.name, chara.hp)
+
 #misc. story functions
 # need: when rochelle grants access to the temple (garnet lets you through)
 
@@ -676,7 +712,6 @@ def unlockMoonstone():
     the Moonstone. Is that the guy you were warned about?!  Damn, you've got to catch him!
     """)
 
-#
 def flipSwitchA():
     templeSwitch1 = True
     if templeSwitch1 and templeSwitch2 == True:
@@ -698,7 +733,7 @@ def berserk():
     Vergil's body is taken by a sudden, bright-yellow aura of flame as his eyes shine and his hair
     almost seems to ignite.  It's almost like the wind is blowing his attire from inside this temple.
     He wants nothing more than to destroy you, now.
-    """):
+    """)
     vergil.hp = 120
     vergil.ep = 80
     vergil.skills.remove[flameStrike, frenzy]
@@ -776,6 +811,7 @@ while game == "not win":
         #actions: attack, block, skill, item, run (prompt)
         #have a function to return list of sub-options that are matched to numbers
         #have a way to log turns, health, energy, skills
+        #look should show health and print the enemy's flavor text
         if player.hp <= 0:
             game = "over"
         if enemy.hp <= 0:
