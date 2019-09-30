@@ -36,6 +36,11 @@ class Item:
         if self.uses == 0:
             print("This item's run its course.")
             del self
+    
+    def discard(self):
+        print("Won't be needing this.")
+            del self
+
 
 
 class Character:
@@ -54,7 +59,8 @@ class Character:
         self.agi = agi
         self.quote = quote
         self.skills = skills
-    
+    ######################## == COMMANDS == #########################
+    #actions left: skill setup
     def attack(self, target):
         damage = round(self.atk * random.uniform(.75, 1.25)) - round(target.vit * random.uniform(.8, 1.2))
         if damage < 1: 
@@ -68,6 +74,13 @@ class Character:
     def debuff(self, stat, amount):
         self.stat -= amount
     
+    def block(self):
+        print("{} takes a guard stance!").format(self.name)
+        blockTurn = turnNumber
+        self.vit * 2
+        if turnNumber != turnNumber or combat == False:
+            return self.vit / 2
+
     def look(self, enemy): 
         print(enemy.about)
 
@@ -79,11 +92,6 @@ class Character:
             combat = False
         else: 
             print("...but couldn't!")
-
-######################## == COMMANDS == #########################
-
-#actions: attack, block, skill, item, run (prompt)
-
 
 ######################### == SKILLS == #########################
 
@@ -683,7 +691,7 @@ def randomEncounter(pChance, enemyA):
         combat = True
         enemy = enemyA
         print(str("You've been discovered by {}.".format(current_room['enemy'])))
-        print(current_room['enemy'['quote']])
+        print(current_room['enemy']['quote'])
     else:
         pass
 
@@ -691,7 +699,7 @@ def randomEncounter(pChance, enemyA):
 def startEncounter(chara):
     combat = True
     enemy = chara
-    print(current_room[chara['quote']])
+    print(current_room[chara]['quote'])
     return str("{} will be your opponent!".format(chara.name))
 
 def showHealth(chara):
@@ -791,8 +799,9 @@ while game == "not win":
 
         current_room = "empty"
         action = input("What to do...? ").lower()
+        #actions: look, yell, take, equip, go
         if "look" or "look around" in action:
-            print(rooms[current_room['desc']])
+            print(rooms[current_room]['desc'])
         elif "yell" in action:
             randomEncounter(100)
         elif "take" in action:
@@ -805,8 +814,8 @@ while game == "not win":
         elif 'go' in action:
             if (action in directions and action not in rooms[current_room]):
                 print("You can't go that way!")
-        else:
-            current_room = rooms[current_room][action]
+            else:
+                current_room = rooms[current_room][action]
     while combat == True:
         #actions: attack, block, skill, item, run (prompt)
         #have a function to return list of sub-options that are matched to numbers
