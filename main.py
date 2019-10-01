@@ -4,13 +4,31 @@
 
 import sys, logging, json, random
 
+####################### == VARIABLES == ########################
+
+game = "start"
+inventory = []
+# define clause: inventory can only contain 5 items; equipment can be pushed into the designations below
+weapon = []
+armor = []
+charm = []
+directions = ['north', 'south', 'east', 'west']
+enemy = None
+combat = False
+turnNumber = 0
+templeSwitch1 = False
+templeSwitch2 = False
+victories = 0
+atrPoints = 10
+sklPoints = 0
+
 ######################### == CLASSES == #########################
 
 class Skill:
     """
     Creates skill objects that can be called upon in battle for the cost of EP.
 
-    flavor, effect = str | power = int | tooltips = list of strings
+    flavor, effect = str | power = function | tooltips = list of strings
     """
     def __init__(self, flavor, power, effect, tooltips):
         self.flavor = flavor
@@ -39,7 +57,7 @@ class Item:
     
     def discard(self):
         print("Won't be needing this.")
-            del self
+        del self
 
 
 
@@ -93,9 +111,13 @@ class Character:
         else: 
             print("...but couldn't!")
 
+    def useSkill(self, skillNumber):
+        pass
+
 ######################### == SKILLS == #########################
 
-doubleStrike = Skill()
+doubleStrike = Skill("Allows you to attack the enemy twice in a row.",
+)
 
 flameStrike = Skill()
 
@@ -663,25 +685,6 @@ rooms = {
     },
 }
 
-####################### == VARIABLES == ########################
-
-game = "start"
-inventory = []
-# define clause: inventory can only contain 5 items; equipment can be pushed into the designations below
-weapon = []
-armor = []
-charm = []
-directions = ['north', 'south', 'east', 'west']
-current_room = rooms['C5']
-enemy = None
-combat = False
-turnNumber = 0
-templeSwitch1 = False
-templeSwitch2 = False
-kills = 0
-atrPoints = 10
-sklPoints = 0
-
 #################### == MISC. FUNCTIONS == #####################
 
 #deciding when random encounters will happen, in certain areas
@@ -715,7 +718,7 @@ def unlockMoonstone():
     As the other switch is clicked into an active position, you hear gates rumbling near the entrance.  It
     seems you might have finally unlocked the Moonst--
     "HEY, THANKS FOR DOING ALL THE WORK!"
-    That's a loud yell you hear all of a sudden, snapping oyu out of your thoughts.  As you look around the
+    That's a loud yell you hear all of a sudden, snapping you out of your thoughts.  As you look around the
     corner, there's someone with wild hair and a long, flowing jacket that disappears.  He's heading towards
     the Moonstone. Is that the guy you were warned about?!  Damn, you've got to catch him!
     """)
@@ -744,51 +747,95 @@ def berserk():
     """)
     vergil.hp = 120
     vergil.ep = 80
+    vergil.atk += 10
+    vergil.vit -= 5
+    vergil.agi += 8
     vergil.skills.remove[flameStrike, frenzy]
     vergil.skills.append[berserkRush, berserkInferno]
 
 def killCharacter(chara):
-    current_room['people'].remove(chara)
-    current_room['enemy'].remove(chara)
+    #current_room['people'].remove(chara)
+    #current_room['enemy'].remove(chara)
+    del chara
     #killer queen has touched this character
 
 ################### == STARTING SEQUENCE == ####################
 
-#how do we wake up? (and allocate our atrPoints?)
-#define the player as an entity here; store their responses and apply them to an instance of Character after all prompts are answered
-print("""Your entire arm aches... buuut at least it feels better than it did.""")
-print()
-print()
-print()
-print()
-print()
-print()
-print()
-print()
-print()
-print()
-print()
-print()
-print()
-print()
-print()
+print("""
+Your entire arm aches... buuut at least it feels better than it did.
+Your entire everything feels better than it did, honestly, if a little more itchy...
+"'Pparently it never feels good turnin' into a Ferial," a motherly, southern voice tells you.
+When you turn your head to the source of it, you're faced... with a huge, well-covered bust.
+...Try a little higher.
+There.  A pink-haired woman with cow horns has been looking after you, it seems, and has
+helped you come to, in... what seems to be an infirmary.
+"Hmhm.  I was hopin' you'd wake up soon.  Name's Bianca."
+She pats your arm, and then gives you a handheld mirror to look into.
+You're... different.  Your hair's wil, your skin is darker and paler... and there are markings
+on you cheeks.  ...Turning... what does that mean?  You have an idea, but don't want to say it
+out loud.  You feel like that would make it real.
+Regardless, the first thing out of your mouth is something about wanting to be human again.
+"--Haaaang on, sugarcup.  You just woke up, I can't let you outta here just yet.  Not to mention,
+it ain't up to me.  Just sit tight and answer a couple questions so I can get a feel for ya while
+I finish fixin' you up."
+
+-----
+You have ten attribute points to start with.  The questions Bianca asks you will help you apply them.
+For example, on a scale of 0 to 10, 5 will equal no change, while 7 will spend 2 points, 4 will
+refund 1 point, and vice versa.
+You start with 30 health, 24 energy, and 8 each of attack, vitality (defense), and agility.
+Health will change by 5 per point, energy will change by 3, and the rest change by 1.
+And please keep track, because I'm too tired to foolproof it.  If you end up with negative points,
+you just won't be able to get stronger for longer depending on how many you spent.
+--Actually, never mind, that's a feature.  You just don't *need* training.
+-----
+
+""")
+
+playerName = input("Tell me yer name, sweetheart. --> ")
+playerHealth = 30 + round((5 * input("Pleasure meetin' ya.  On a scale of zero to ten, how healthy wouldja say you are? --> ")))
+playerEnergy = 24 + round((3 * input("Alrighty.  Now just keep that scale in mind.  How energetic are ya? --> ")))
+playerAttack = 8 + round((input("How strong do ya think you are? --> ")))
+playerVitality = 8 + round((input("How much of a beating can ya take? --> ")))
+playerAgility = 8 + round((input("And lastly, how quickly can ya move around? --> ")))
+print("Alrighty.  I hope y'can keep it together here, {}.  The Ferial life can be kinda tough.").format(playerName)
+# Creates the character.
 player = Character(str(playerName),
-    """You don't remember how you gothere.  All you remember is that you were attacked by
+    """You don't remember how you got here.  All you remember is that you were attacked by
     another Ferial and woke up as one in the infirmary.  Now, though, you have an opportunity
     to turn back.  Will you succeed in taking this path?""",
-    playerHealth, playerEnergy, playerAttack, playerVitality, playerAgility
+    playerHealth, playerEnergy, playerAttack, playerVitality, playerAgility,
     "", 
     [])
+
+print("""
+The two of you talk for a little while after that, and one topic leads to another...
+"Goodness, you're really keen on turnin' back, huh?" Bianca says with a sigh.
+"Well, I don't even know if there's a way to do so, honestly.  You'd probably have to
+interact with the Moonstone these people keep somehow.  But that thing is a legendary
+artifact.  Y'really think they'd let you near it?"
+...
+"...Goodness, I won't be able to sway ya.  Well, at the least, if you're that
+set on it, you should prolly talk to the Turntide family.  They're up in the northeast
+corner of town.  And once you're healed up here, if you need some practice gettin' back
+into the swing of things, I hear there's some weird critters in the field down south."
+...
+...
+...
+"There ya are.  All set!"  With a reassuring pat on the shoulder, Bianca finally gets up
+and allows you to do the same.  Your journey begins here.
+""")
 
 ######################## == LET'S GO == ########################
 
 game = "not win"
+current_room = rooms['C5']
 
 #here's the gaem
 while game == "not win":
     while combat == False:
         if current_room in [rooms['A7'], rooms['B1'], rooms['B2'], rooms['B3'],
-        rooms['B7'], rooms['C7'], rooms['D2'], rooms['D3'], [rooms['D7']]]:
+        rooms['B7'], rooms['C7'], rooms['D2'], rooms['D3'], rooms['D7']]:
             randomEncounter(20)
             if combat == True:
                 break
@@ -807,10 +854,14 @@ while game == "not win":
         elif "take" in action:
             item = action[4:]
             for c in rooms[current_room]['contents']:
-                if c == item:
+                if c == item and len(inventory) < 5:
                     inventory.append(item)
                     rooms[current_room]['contents'].remove(item)
                     print("Got it.")
+                elif c == item and len(inventory) >= 5:
+                    print("You'd be able to pick it up, but you're carrying too much already.")
+        elif "equip" in action:
+            pass
         elif 'go' in action:
             if (action in directions and action not in rooms[current_room]):
                 print("You can't go that way!")
@@ -821,11 +872,19 @@ while game == "not win":
         #have a function to return list of sub-options that are matched to numbers
         #have a way to log turns, health, energy, skills
         #look should show health and print the enemy's flavor text
+        turnNumber += 1
+        action = input("What to do...? ").lower()
         if player.hp <= 0:
             game = "over"
         if enemy.hp <= 0:
-            print(You made it through the fight!)
+            print("You made it through the fight!")
             enemy = None
+            combat = False
 
-while game == "over":
-    #dead
+if game == "over":
+    print("Looks like your quest to return to your human life ended in having no life to return to.")
+    print("Should've gotten used to the wild life...")
+
+if game == "win":
+    print("Look at that!  You managed to return to your human form.")
+    print("You weren't out too long.  Let's blend back in before people start to worry!")
