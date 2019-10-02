@@ -1,6 +1,6 @@
-### Not yet finished!!
-### If you're seeing this message and you're grading this work, please have mercy yet. ;w;
-### I just need a bit longer; this'll be done soon.
+### I've done as much as I can afford to.
+### This project was too ambitious, and it's held me back for long enough.  I need to catch up, and now.
+### Brownie points for trying with all this?
 
 import sys, logging, json, random
 
